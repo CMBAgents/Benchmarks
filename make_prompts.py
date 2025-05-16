@@ -1,4 +1,6 @@
 import pandas as pd
+import re
+from typing import Optional
 
 # --- helper --------------------------------------------------------------
 def make_prompt(row: pd.Series) -> str:
@@ -22,3 +24,24 @@ def make_prompt(row: pd.Series) -> str:
         "### Requirements\n"
         f"{row.code_answer_requirements.strip()}"
     )
+
+def extract_python_definition(env_str: str) -> Optional[str]:
+    """
+    Extracts the Python code between \\begin{python} and \\end{python} markers.
+
+    Parameters
+    ----------
+    env_str : str
+        A string that includes a \\begin{python}…\\end{python} block.
+
+    Returns
+    -------
+    Optional[str]
+        The code inside the block, or None if no such block is found.
+    """
+    pattern = r"\\begin\{python\}([\s\S]*?)\\end\{python\}"
+    m = re.search(pattern, env_str)
+    if not m:
+        return None
+    # Strip any leading/trailing whitespace
+    return m.group(1).strip()

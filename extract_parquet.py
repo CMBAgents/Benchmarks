@@ -2,6 +2,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 from pathlib import Path
 from typing import Union, List
+import re
 
 def read_parquet_file(file_path: Union[str, Path]) -> pd.DataFrame:
     """
@@ -53,6 +54,24 @@ def read_parquet(path: Union[str, Path]) -> pd.DataFrame:
         return read_parquet_directory(path)
     else:
         raise ValueError(f"Path {path} does not exist")
+
+
+def extract_file_path(doc_str: str) -> str:
+    """
+    Extracts the file path from a formatted documentation string.
+
+    Parameters
+    ----------
+    doc_str : str
+        The documentation string containing a 'File path:' line.
+
+    Returns
+    -------
+    str
+        The extracted file path, or an empty string if not found.
+    """
+    match = re.search(r'^File path:\s*(.+)', doc_str, re.MULTILINE)
+    return match.group(1) if match else ""
 
 # if __name__ == "__main__":
 #     # Example usage
