@@ -1,0 +1,400 @@
+,statement,prompt,reference_code,output
+0,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega baryon = 0.02.,"###Problem
+Compute the CMB temperature power spectra in uK^2 units for a baryon density parameter set to 0.02, up to a maximum multipole of 3000. Consider other parameters such as H0=67.3, omch2=0.122, mnu=0.06, omk=0, tau=0.06.
+
+###Requirement
+provide a python code where ombh2 can be variable like
+\begin{python}
+def get_tt(ombh2=0.02):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_tt(ombh2=0.02):
+    H0=67.5
+    omch2=0.122
+    mnu=0.06
+    omk=0
+    tau=0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,0]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([   0.        ,    0.        , 1001.14157784, ...,   22.0227162 ,
+         21.97762486,   21.93238736]))"
+1,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega k(curvature) = 0.05,"### Problem:
+Compute the CMB temperature power spectra in uK^2 units for a curvature density parameter set to 0.05, up to a maximum multipole of 3000. Consider other parameters such as H0=67.3, omch2=0.122, mnu=0.06, ombh2=0.022, tau=0.06.
+
+### Requirements
+provide a python code where omk can be variable like
+\begin{python}
+def get_tt(omk=0.05):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_tt(omk=0.05):
+    H0=67.5
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    tau=0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,0]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([  0.        ,   0.        , 951.80055956, ...,  36.35449933,
+        36.24126772,  36.12852229]))"
+2,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=70,"### Problem:
+Compute the CMB temperature power spectra in uK^2 units for a Hubble constant set to 70, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, tau=0.06.
+
+### Requirements
+provide a python code where H0 can be variable like
+\begin{python}
+def get_tt(H0=70):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_tt(H0=70):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    tau=0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,0]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([   0.        ,    0.        , 1031.44147492, ...,   23.6933788 ,
+         23.64468708,   23.59580001]))"
+3,Compute the Raw CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=74,"### Problem:
+Compute the raw CMB temperature power spectra(D_\ell) in uK^2 units for a Hubble constant set to 70, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, tau=0.06.
+
+### Requirements
+provide a python code where H0 can be variable like
+\begin{python}
+def get_tt(H0=74):
+    return l, dl
+\end{python}
+","import camb
+import numpy as np
+def get_tt(H0=74):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    tau=0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars,raw_cl=True, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,0]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([0.00000000e+00, 0.00000000e+00, 1.14346200e+03, ...,
+       1.53267296e-05, 1.52789764e-05, 1.52312438e-05]))"
+4,Compute the CMB E-mode power spectrum for Planck 2018 cosmological parameters with optical depth tau = 0.04,"### Problem:
+Compute the CMB E-mode power spectra in uK^2 units for an optical depth parameter set to 0.04, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5.
+
+### Requirements
+provide a python code where tau is variable
+\begin{python}
+def get_ee(tau=0.04):
+    return l, dl
+\end{python}
+","import camb
+import numpy as np
+def get_ee(tau=0.04):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,1]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([0.        , 0.        , 0.02127696, ..., 0.88934104, 0.88569119,
+       0.88206698]))"
+5,Compute the total CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0,"### Problem:
+Compute the CMB B-mode power spectra in uK^2 units for tensor to scalar ratio set to 0, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5 tau=0.06.
+
+### Requirements
+provide a python code where r is variable
+\begin{python}
+def get_bb(r=0):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_bb(r=0):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    tau = 0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
+    pars.WantTensors = True
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,2]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([0.00000000e+00, 0.00000000e+00, 1.57076521e-06, ...,
+       1.32186054e-02, 1.32033109e-02, 1.31880299e-02]))"
+6,Compute the total CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0,"### Problem:
+Compute the CMB B-mode power spectra in uK^2 units for tensor to scalar ratio set to 0.1, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5 tau=0.06.
+
+### Requirements
+provide a python code where r is variable
+\begin{python}
+def get_bb(r=0.1):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_bb(r=0.1):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    tau = 0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
+    pars.WantTensors = True
+    results = camb.get_results(pars)
+    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra = powers['total']
+    return np.arange(lmax+1), spectra[:lmax+1,2]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([0.        , 0.        , 0.00162742, ..., 0.01321861, 0.01320331,
+       0.01318803]))"
+7,Compute the angular diameter distance for Planck 2018 cosmological parameters between redshift 0 to 4.,"### Problem:
+Compute the angular diameter distance from redshift 0 to 4. Consider the cosmological parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5 tau=0.06. Use 100 points in the redshift range.
+
+### Requirements
+provide a python code where  minimum and maximum redshift can be variables
+egin{python}
+def get_angular_diameter_distance(zmin=0,zmax=4):
+    return z, da
+\end{python}
+","import camb
+import numpy as np
+def get_angular_diameter_distance(zmin=0,zmax=4):
+    z = np.linspace(zmin,zmax,100)
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    tau = 0.06
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau)
+    results = camb.get_background(pars)
+    DA = results.angular_diameter_distance(z)
+    return z,DA
+","(array([0.        , 0.04040404, 0.08080808, 0.12121212, 0.16161616,
+       0.2020202 , 0.24242424, 0.28282828, 0.32323232, 0.36363636,
+       0.4040404 , 0.44444444, 0.48484848, 0.52525253, 0.56565657,
+       0.60606061, 0.64646465, 0.68686869, 0.72727273, 0.76767677,
+       0.80808081, 0.84848485, 0.88888889, 0.92929293, 0.96969697,
+       1.01010101, 1.05050505, 1.09090909, 1.13131313, 1.17171717,
+       1.21212121, 1.25252525, 1.29292929, 1.33333333, 1.37373737,
+       1.41414141, 1.45454545, 1.49494949, 1.53535354, 1.57575758,
+       1.61616162, 1.65656566, 1.6969697 , 1.73737374, 1.77777778,
+       1.81818182, 1.85858586, 1.8989899 , 1.93939394, 1.97979798,
+       2.02020202, 2.06060606, 2.1010101 , 2.14141414, 2.18181818,
+       2.22222222, 2.26262626, 2.3030303 , 2.34343434, 2.38383838,
+       2.42424242, 2.46464646, 2.50505051, 2.54545455, 2.58585859,
+       2.62626263, 2.66666667, 2.70707071, 2.74747475, 2.78787879,
+       2.82828283, 2.86868687, 2.90909091, 2.94949495, 2.98989899,
+       3.03030303, 3.07070707, 3.11111111, 3.15151515, 3.19191919,
+       3.23232323, 3.27272727, 3.31313131, 3.35353535, 3.39393939,
+       3.43434343, 3.47474747, 3.51515152, 3.55555556, 3.5959596 ,
+       3.63636364, 3.67676768, 3.71717172, 3.75757576, 3.7979798 ,
+       3.83838384, 3.87878788, 3.91919192, 3.95959596, 4.        ]), array([   0.        ,  170.80848316,  325.58647771,  466.01938436,
+        593.57258665,  709.52769327,  815.01156298,  911.01974387,
+        998.43555761, 1078.04576315, 1150.55351505, 1216.58916689,
+       1276.71934589, 1331.45463088, 1381.25609336, 1426.5409066 ,
+       1467.68718483, 1505.03818187, 1538.90595283, 1569.57456272,
+       1597.30290992, 1622.32722032, 1644.86325813, 1665.10829151,
+       1683.24284503, 1699.43226586, 1713.82812652, 1726.56948377,
+       1737.78401028, 1747.58901364, 1756.09235512, 1763.39327931,
+       1769.58316403, 1774.74619901, 1778.96000078, 1782.29617021,
+       1784.82079866, 1786.59492775, 1787.67496751, 1788.11307678,
+       1787.95750981, 1787.25293204, 1786.04070822, 1784.3591654 ,
+       1782.24383312, 1779.72766303, 1776.84122976, 1773.61291483,
+       1770.06907503, 1766.23419689, 1762.13103823, 1757.78075821,
+       1753.20303664, 1748.41618372, 1743.43724092, 1738.28207382,
+       1732.96545756, 1727.50115556, 1721.90199215, 1716.17991949,
+       1710.34607933, 1704.41086011, 1698.38394963, 1692.27438383,
+       1686.0905918 , 1679.84043756, 1673.53125865, 1667.16990189,
+       1660.76275664, 1654.31578545, 1647.8345527 , 1641.32425105,
+       1634.78972602, 1628.23549895, 1621.66578817, 1615.08452882,
+       1608.49539124, 1601.90179809, 1595.30694034, 1588.71379207,
+       1582.12512437, 1575.54351827, 1568.97137676, 1562.41093605,
+       1555.86427608, 1549.33333033, 1542.81989498, 1536.32563747,
+       1529.85210455, 1523.4007297 , 1516.97284021, 1510.56966372,
+       1504.19233435, 1497.84189847, 1491.51932009, 1485.22548591,
+       1478.96121008, 1472.72723859, 1466.52425351, 1460.35287684]))"
+8,Compute the linear matter power spectrum with Planck 2018 cosmological parameters for redshift 0,"### Problem:
+Compute the linear matter power spectrum at redshift=0 for the kh range 1e-4 < kh < 1. Consider the cosmological parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5 tau=0.06. You can use maximum k=2.0 and 200 points.
+
+### Requirements
+provide a python code where  redshift z is variable
+egin{python}
+def get_matter_power_spectrum(z=0):
+    return kh, pk
+\end{python}
+","import camb
+import numpy as np
+def get_matter_power_spectrum(z=0):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    tau = 0.06
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau)
+    pars.set_matter_power(redshifts=[z], kmax=2.0)
+    pars.NonLinear = camb.model.NonLinear_none
+    results = camb.get_results(pars)
+    results = camb.get_results(pars)
+    kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=1, npoints = 200)
+    return kh, pk[0]
+","(array([1.00000000e-04, 1.04737090e-04, 1.09698580e-04, 1.14895100e-04,
+       1.20337784e-04, 1.26038293e-04, 1.32008840e-04, 1.38262217e-04,
+       1.44811823e-04, 1.51671689e-04, 1.58856513e-04, 1.66381689e-04,
+       1.74263339e-04, 1.82518349e-04, 1.91164408e-04, 2.00220037e-04,
+       2.09704640e-04, 2.19638537e-04, 2.30043012e-04, 2.40940356e-04,
+       2.52353917e-04, 2.64308149e-04, 2.76828663e-04, 2.89942285e-04,
+       3.03677112e-04, 3.18062569e-04, 3.33129479e-04, 3.48910121e-04,
+       3.65438307e-04, 3.82749448e-04, 4.00880633e-04, 4.19870708e-04,
+       4.39760361e-04, 4.60592204e-04, 4.82410870e-04, 5.05263107e-04,
+       5.29197874e-04, 5.54266452e-04, 5.80522552e-04, 6.08022426e-04,
+       6.36824994e-04, 6.66991966e-04, 6.98587975e-04, 7.31680714e-04,
+       7.66341087e-04, 8.02643352e-04, 8.40665289e-04, 8.80488358e-04,
+       9.22197882e-04, 9.65883224e-04, 1.01163798e-03, 1.05956018e-03,
+       1.10975250e-03, 1.16232247e-03, 1.21738273e-03, 1.27505124e-03,
+       1.33545156e-03, 1.39871310e-03, 1.46497140e-03, 1.53436841e-03,
+       1.60705282e-03, 1.68318035e-03, 1.76291412e-03, 1.84642494e-03,
+       1.93389175e-03, 2.02550194e-03, 2.12145178e-03, 2.22194686e-03,
+       2.32720248e-03, 2.43744415e-03, 2.55290807e-03, 2.67384162e-03,
+       2.80050389e-03, 2.93316628e-03, 3.07211300e-03, 3.21764175e-03,
+       3.37006433e-03, 3.52970730e-03, 3.69691271e-03, 3.87203878e-03,
+       4.05546074e-03, 4.24757155e-03, 4.44878283e-03, 4.65952567e-03,
+       4.88025158e-03, 5.11143348e-03, 5.35356668e-03, 5.60716994e-03,
+       5.87278661e-03, 6.15098579e-03, 6.44236351e-03, 6.74754405e-03,
+       7.06718127e-03, 7.40196000e-03, 7.75259749e-03, 8.11984499e-03,
+       8.50448934e-03, 8.90735464e-03, 9.32930403e-03, 9.77124154e-03,
+       1.02341140e-02, 1.07189132e-02, 1.12266777e-02, 1.17584955e-02,
+       1.23155060e-02, 1.28989026e-02, 1.35099352e-02, 1.41499130e-02,
+       1.48202071e-02, 1.55222536e-02, 1.62575567e-02, 1.70276917e-02,
+       1.78343088e-02, 1.86791360e-02, 1.95639834e-02, 2.04907469e-02,
+       2.14614120e-02, 2.24780583e-02, 2.35428641e-02, 2.46581108e-02,
+       2.58261876e-02, 2.70495973e-02, 2.83309610e-02, 2.96730241e-02,
+       3.10786619e-02, 3.25508860e-02, 3.40928507e-02, 3.57078596e-02,
+       3.73993730e-02, 3.91710149e-02, 4.10265811e-02, 4.29700470e-02,
+       4.50055768e-02, 4.71375313e-02, 4.93704785e-02, 5.17092024e-02,
+       5.41587138e-02, 5.67242607e-02, 5.94113398e-02, 6.22257084e-02,
+       6.51733960e-02, 6.82607183e-02, 7.14942899e-02, 7.48810386e-02,
+       7.84282206e-02, 8.21434358e-02, 8.60346442e-02, 9.01101825e-02,
+       9.43787828e-02, 9.88495905e-02, 1.03532184e-01, 1.08436597e-01,
+       1.13573336e-01, 1.18953407e-01, 1.24588336e-01, 1.30490198e-01,
+       1.36671636e-01, 1.43145894e-01, 1.49926843e-01, 1.57029012e-01,
+       1.64467618e-01, 1.72258597e-01, 1.80418641e-01, 1.88965234e-01,
+       1.97916687e-01, 2.07292178e-01, 2.17111795e-01, 2.27396575e-01,
+       2.38168555e-01, 2.49450814e-01, 2.61267523e-01, 2.73644000e-01,
+       2.86606762e-01, 3.00183581e-01, 3.14403547e-01, 3.29297126e-01,
+       3.44896226e-01, 3.61234270e-01, 3.78346262e-01, 3.96268864e-01,
+       4.15040476e-01, 4.34701316e-01, 4.55293507e-01, 4.76861170e-01,
+       4.99450512e-01, 5.23109931e-01, 5.47890118e-01, 5.73844165e-01,
+       6.01027678e-01, 6.29498899e-01, 6.59318827e-01, 6.90551352e-01,
+       7.23263390e-01, 7.57525026e-01, 7.93409667e-01, 8.30994195e-01,
+       8.70359136e-01, 9.11588830e-01, 9.54771611e-01, 1.00000000e+00]), array([  410.18448466,   428.81109298,   448.2825704 ,   468.63714868,
+         489.91473728,   512.15694556,   535.40724543,   559.71109733,
+         585.116     ,   611.67156114,   639.42957895,   668.44402341,
+         698.77120163,   730.46999887,   763.60195689,   798.23120239,
+         834.42455315,   872.25170434,   911.78533873,   953.10128983,
+         996.27867834,  1041.39993498,  1088.55072448,  1137.82028035,
+        1189.30156283,  1243.09140894,  1299.29058681,  1358.00396532,
+        1419.34034905,  1483.412721  ,  1550.3384355 ,  1620.23936886,
+        1693.24205134,  1769.47776528,  1849.08250054,  1932.19677217,
+        2018.96615044,  2109.54129625,  2204.07807115,  2302.73706917,
+        2405.68412808,  2513.09016894,  2625.13144784,  2741.98901467,
+        2863.84896943,  2990.90212278,  3123.34401138,  3261.37472914,
+        3405.19861963,  3555.02392939,  3711.06177473,  3873.52672378,
+        4042.63553699,  4218.60744293,  4401.66171845,  4592.01870547,
+        4789.8976318 ,  4995.51712333,  5209.09271332,  5430.83688819,
+        5660.95659954,  5899.65246919,  6147.11722687,  6403.53372003,
+        6669.07402526,  6943.89610238,  7228.14414793,  7521.94461472,
+        7825.40608306,  8138.61326308,  8461.62835536,  8794.48651906,
+        9137.19547099,  9489.72850261,  9852.02426466, 10223.98258262,
+       10605.4623941 , 10996.27560471, 11396.18262443, 11804.89147449,
+       12222.05119728, 12647.25149195, 13080.01223424, 13519.78881108,
+       13965.96400707, 14417.84339163, 14874.60933158, 15335.35802907,
+       15799.18637857, 16265.14635433, 16731.97606675, 17198.13620739,
+       17662.08639346, 18122.31570311, 18577.24674618, 19025.23911188,
+       19464.49906552, 19892.96055163, 20308.42483195, 20708.52792299,
+       21090.80537059, 21452.65649048, 21791.40289419, 22104.24851571,
+       22388.33638353, 22640.66576479, 22858.15879113, 23037.7137761 ,
+       23176.23836131, 23270.70245916, 23318.14158247, 23315.78205997,
+       23261.04159471, 23151.68044828, 22985.85599803, 22762.22163944,
+       22480.0836825 , 22139.39634843, 21741.08088125, 21286.86258835,
+       20779.69118695, 20223.47831837, 19623.42732124, 18985.8503901 ,
+       18318.16265368, 17629.03839823, 16927.50699833, 16223.4951977 ,
+       15526.81914826, 14848.58174709, 14198.20329382, 13581.5710901 ,
+       13003.51551698, 12472.67788876, 11996.9565638 , 11571.16313779,
+       11184.54894823, 10827.6380318 , 10490.82737218, 10162.11227297,
+        9827.52175977,  9470.6178549 ,  9071.7798298 ,  8618.67447827,
+        8110.54816204,  7559.35524992,  6987.90329263,  6422.98465245,
+        5891.02070768,  5416.80624788,  5019.96113348,  4708.89158307,
+        4474.02577565,  4287.47692978,  4111.14661398,  3908.79793746,
+        3658.84833565,  3363.01658786,  3044.54258002,  2740.62339744,
+        2490.28901802,  2309.81818711,  2181.13111209,  2068.80294804,
+        1936.63120477,  1770.1678582 ,  1591.56288664,  1435.39783446,
+        1320.45963237,  1234.90232704,  1149.1779248 ,  1047.18521006,
+         943.23297428,   857.68490762,   791.84623111,   728.70410324,
+         660.69788027,   598.02089545,   546.70400531,   499.77454593,
+         452.85644539,   410.71768044,   374.03723792,   339.25053066,
+         307.22907272,   278.76343589,   252.37019115,   228.35368404,
+         206.63158359,   186.73136524,   168.7279001 ,   152.37253241,
+         137.5072944 ,   124.01426673,   111.78203657,   100.70570114,
+          90.68438922,    81.62199611,    73.43058242,    66.02990833]))"
+9,Compute the delensed total CMB B-mode power spectrum with Planck 2018 cosmological parameters for a delensing efficiency of 10%.,"### Problem:
+Compute the Delensed CMB B-mode power spectra in uK^2 units for tensor to scalar ratio set to 0.1, up to a maximum multipole of 3000. Consider other parameters such as omk=0, omch2=0.122, mnu=0.06, ombh2=0.022, H0=67.5 tau=0.06. Use a delensing efficiency of 10%.
+
+### Requirements
+provide a python code with r and delens_eff as variables
+\begin{python}
+def get_bb_delensed(r=0.1,delens_eff=10):
+    return l, cl
+\end{python}
+","import camb
+import numpy as np
+def get_bb_delensed(r=0.1,delens_eff=10):
+    omk=0
+    omch2=0.122
+    mnu=0.06
+    ombh2=0.022
+    H0 = 67.5
+    tau = 0.06
+    lmax=3000
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
+    pars.WantTensors = True
+    results = camb.get_results(pars)
+    powers = results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    spectra_tensor = powers['tensor']
+    Alens = 1 - (delens_eff/100)
+    spectra =results.get_partially_lensed_cls(Alens,CMB_unit='muK',lmax=lmax+500)
+    return np.arange(lmax+1), spectra[:lmax+1,2] + spectra_tensor[:lmax+1,2]
+","(array([   0,    1,    2, ..., 2998, 2999, 3000]), array([0.        , 0.        , 0.00162726, ..., 0.01189649, 0.01188275,
+       0.01186902]))"

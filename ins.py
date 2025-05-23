@@ -12,6 +12,7 @@ from inspect_ai.solver import solver, TaskState, Generate
 from inspect_ai.scorer import scorer, mean, stderr, CORRECT, INCORRECT, Score
 from inspect_ai.solver import TaskState
 import difflib
+import numpy as np
 
 @solver
 def submission(source: str):
@@ -137,12 +138,127 @@ def code_match_with_similarity(reference,candidate):
         solver=[submission(candidate)],  
         scorer=[same_io_dynamic(),content_similarity()]
     )
+@scorer(metrics=[mean()])
+def no_input_array_io(rtol: float = 1e-6, atol: float = 1e-8):
+    """
+    Test zero-argument functions that return arrays (or tuples of arrays) by:
+      1. Parsing `reference_code` for the function name.
+      2. Loading that same name from the candidate file.
+      3. Calling each with no arguments.
+      4. Verifying output shapes (and optionally values) match.
+    """
+    async def score(state: TaskState, target) -> Score:
+        cand_src = state.output.completion
+        ref_src = getattr(target, "text", target)
 
+        # Find the first function in the reference
+        ref_tree = ast.parse(ref_src)
+        ref_defs = [n for n in ref_tree.body if isinstance(n, ast.FunctionDef)]
+        if not ref_defs:
+            return Score(
+                value=INCORRECT,
+                answer=cand_src,
+                explanation="Reference has no function definition."
+            )
+        fn_name = ref_defs[0].name
 
+        # Helper to exec & retrieve named function
+        def load_fn(src: str, name: str):
+            ns = {}
+            exec(compile(src, "<string>", "exec"), ns)
+            if name not in ns or not callable(ns[name]):
+                raise ValueError(f"Function {name!r} not found.")
+            return ns[name]
+
+        try:
+            cand_fn = load_fn(cand_src, fn_name)
+            ref_fn = load_fn(ref_src, fn_name)
+        except Exception as e:
+            return Score(
+                value=INCORRECT,
+                answer=cand_src,
+                explanation=f"Load error: {e}"
+            )
+
+        # Call both functions with no args
+        try:
+            c_out = cand_fn()
+            r_out = ref_fn()
+        except Exception as e:
+            return Score(
+                value=INCORRECT,
+                answer=cand_src,
+                explanation=f"Runtime error when calling {fn_name}(): {e}"
+            )
+
+        # Normalize to tuples
+        c_tup = c_out if isinstance(c_out, tuple) else (c_out,)
+        r_tup = r_out if isinstance(r_out, tuple) else (r_out,)
+
+        if len(c_tup) != len(r_tup):
+            return Score(
+                value=INCORRECT,
+                answer=cand_src,
+                explanation=(
+                    f"Return-value count mismatch: got {len(c_tup)}, "
+                    f"expected {len(r_tup)}."
+                )
+            )
+
+        # Compare each returned element
+        for i, (c_val, r_val) in enumerate(zip(c_tup, r_tup)):
+            if isinstance(c_val, np.ndarray) and isinstance(r_val, np.ndarray):
+                if c_val.shape != r_val.shape:
+                    return Score(
+                        value=INCORRECT,
+                        answer=cand_src,
+                        explanation=(
+                            f"Output #{i} shape mismatch: "
+                            f"{c_val.shape} vs {r_val.shape}"
+                        )
+                    )
+                # Optional: check numerical closeness
+                # if not np.allclose(c_val, r_val, rtol=rtol, atol=atol):
+                #     return Score(
+                #         value=INCORRECT,
+                #         answer=cand_src,
+                #         explanation=(
+                #             f"Values differ beyond tolerance in output #{i}."
+                #         )
+                #     )
+            else:
+                if c_val != r_val:
+                    return Score(
+                        value=INCORRECT,
+                        answer=cand_src,
+                        explanation=(
+                            f"Output #{i} mismatch: got {c_val} "
+                            f"({type(c_val)}), expected {r_val} ({type(r_val)})"
+                        )
+                    )
+
+        return Score(value=CORRECT, answer=cand_src)
+
+    return score
+@task
+def camb_with_similarity(reference,candidate): 
+    return Task(
+        dataset=[Sample(input="Return Python code solving the task.", target=reference)],
+        solver=[submission(candidate)],  
+        scorer=[no_input_array_io(),content_similarity()]
+    )
+                
 def evaluate(reference_code, candidate_code):
     logs = inspect_eval(code_match_with_similarity(reference_code,candidate_code), model="openai/gpt-4.1-2025-04-14")
     l ={}
     for i in range(2):
         l[logs[0].results.scores[i].name] = logs[0].results.scores[i].metrics['mean'].value
     return l
-    
+
+def evaluate_camb(reference_code, candidate_code):
+    logs = inspect_eval(camb_with_similarity(reference_code,candidate_code), model="openai/gpt-4.1-2025-04-14")
+    l ={}
+    for i in range(2):
+        l[logs[0].results.scores[i].name] = logs[0].results.scores[i].metrics['mean'].value
+    return l
+
