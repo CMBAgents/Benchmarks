@@ -1,16 +1,18 @@
-,statement,prompt,reference_code
-0,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega baryon = 0.02.,"Calculate the Cosmic Microwave Background (CMB) temperature power spectrum for a flat Lambda CDM cosmology using the following parameters:
+statement,prompt,reference_code
+Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega baryon = 0.02.,"Calculate the Cosmic Microwave Background (CMB) temperature power spectrum for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
-Baryon density ($\Omega_b h^2$): 0.022
+Baryon density ($\Omega_b h^2$): 0.02
 Cold dark matter density ($\Omega_c h^2$): 0.122
 Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0 (flat cosmology)
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the temperature power spectrum ($C_l^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 - l: Multipole moment (integer values from 2 to 3000)
-- TT: Temperature power spectrum ($C_l^{TT}$ in $\mu K^2$)","import camb
+- TT: Temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$ in $\mu K^2$)","import camb
 import numpy as np
 def get_tt():
     H0=67.5
@@ -21,12 +23,13 @@ def get_tt():
     tau=0.06
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
     powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,0]
 "
-1,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega k(curvature) = 0.05,"Calculate the Cosmic Microwave Background (CMB) temperature power spectrum for a non-flat Lambda CDM cosmology using the following parameters:
+Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with Omega k(curvature) = 0.05,"Calculate the Cosmic Microwave Background (CMB) temperature power spectrum for a non-flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.3 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -34,10 +37,12 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0.05
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the temperature power spectrum ($C_l^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
-TT: Temperature power spectrum ($C_l^{TT}$ in $\mu K^2$) ","import camb
+TT: Temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$ in $\mu K^2$) ","import camb
 import numpy as np
 def get_tt():
     H0=67.5
@@ -48,12 +53,13 @@ def get_tt():
     tau=0.06
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
     powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,0]
 "
-2,Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=70,"Calculate the Cosmic Microwave Background (CMB) temperature power spectrum for a flat Lambda CDM cosmology using the following parameters:
+Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=70,"Calculate the raw Cosmic Microwave Background (CMB) temperature power spectrum for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 70 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -61,6 +67,8 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
 Compute the temperature power spectrum ($C_l^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
@@ -75,12 +83,13 @@ def get_tt():
     tau=0.06
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
-    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    powers =results.get_cmb_power_spectra(pars,raw_cl=True,CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,0]
 "
-3,Compute the Raw CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=74,"Calculate the Cosmic Microwave Background (CMB) raw temperature power spectrum for a flat Lambda CDM cosmology using the following parameters:
+Compute the CMB Temperature power spectrum for Planck 2018 cosmological parameters with H0=74,"Calculate the Cosmic Microwave Background (CMB) raw temperature power spectrum for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 74 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -88,8 +97,10 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the raw temperature power spectrum ($C_l^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the temperature power spectrum ($C_l^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
 TT: Raw temperature power spectrum","import camb
 import numpy as np
@@ -102,12 +113,13 @@ def get_tt():
     tau=0.06
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
-    powers =results.get_cmb_power_spectra(pars,raw_cl=True, CMB_unit='muK')
+    powers =results.get_cmb_power_spectra(pars, raw_cl=True, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,0]
 "
-4,Compute the CMB E-mode power spectrum for Planck 2018 cosmological parameters with optical depth tau = 0.04,"Calculate the Cosmic Microwave Background (CMB) E-mode polarization power spectrum ($C_\ell^{EE}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the CMB E-mode power spectrum for Planck 2018 cosmological parameters with optical depth tau = 0.04,"Calculate the Cosmic Microwave Background (CMB) E-mode polarization power spectrum ($l(l+1)C_l^{EE}/(2\pi)$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -115,10 +127,12 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.04
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the E-mode power spectrum ($C_\ell^{EE}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the E-mode power spectrum ($l(l+1)C_l^{EE}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
-EE: E-mode polarization power spectrum ($C_\ell^{EE}$ in $\mu K^2$) ","import camb
+EE: E-mode polarization power spectrum ($l(l+1)C_l^{EE}/(2\pi)$ in $\mu K^2$) ","import camb
 import numpy as np
 def get_ee():
     omk=0
@@ -129,12 +143,13 @@ def get_ee():
     tau=0.04
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau,lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
     powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,1]
 "
-5,Compute the total CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0,"Calculate the Cosmic Microwave Background (CMB) B-mode polarization power spectrum ($C_\ell^{BB}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the total CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0,"Calculate the Cosmic Microwave Background (CMB) B-mode polarization power spectrum ($l(l+1)C_l^{BB}/(2\pi)$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -143,10 +158,12 @@ u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
 Tensor-to-scalar ratio ($r$): 0
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the B-mode power spectrum ($C_\ell^{BB}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the B-mode power spectrum ($l(l+1)C_l^{BB}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
-BB: B-mode polarization power spectrum ($C_\ell^{BB}$ in $\mu K^2$) ","import camb
+BB: B-mode polarization power spectrum ($l(l+1)C_l^{BB}/(2\pi)$ in $\mu K^2$) ","import camb
 import numpy as np
 def get_bb():
     omk=0
@@ -159,12 +176,13 @@ def get_bb():
     r = 0
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
     pars.WantTensors = True
+    pars.InitPower.set_params(As=2e-9, ns=0.965)
     results = camb.get_results(pars)
     powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,2]
 "
-6,Compute the total CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0,"Calculate the Cosmic Microwave Background (CMB) B-mode polarization power spectrum ($C_\ell^{BB}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the total raw CMB B-mode power spectrum for spectrum for Planck 2018 cosmological parameters with r = 0.1,"Calculate the Cosmic Microwave Background (CMB) raw B-mode polarization power spectrum ($C_l^{BB}$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -173,10 +191,12 @@ u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
 Tensor-to-scalar ratio ($r$): 0.1
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
-Compute the B-mode power spectrum ($C_\ell^{BB}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
+Compute the B-mode power spectrum ($C_l^{BB}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
-BB: B-mode polarization power spectrum ($C_\ell^{BB}$ in $\mu K^2$) ","import camb
+BB: B-mode polarization power spectrum ($C_l^{BB}$ in $\mu K^2$) ","import camb
 import numpy as np
 def get_bb():
     omk=0
@@ -189,12 +209,13 @@ def get_bb():
     r = 0.1
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
     pars.WantTensors = True
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
-    powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    powers =results.get_cmb_power_spectra(pars, raw_cl=True, CMB_unit='muK')
     spectra = powers['total']
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,2]
 "
-7,Compute the angular diameter distance for Planck 2018 cosmological parameters between redshift 0 to 4.,"Calculate the angular diameter distance ($d_A$) from redshift $z=0$ to $z=4$ for a flat Lambda CDM cosmology using the following parameters:
+Compute the angular diameter distance for Planck 2018 cosmological parameters between redshift 0 to 4.,"Calculate the angular diameter distance ($d_A$) from redshift $z=0$ to $z=4$ for a flat Lambda CDM cosmology using the following parameter with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -202,6 +223,8 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
 Compute the angular diameter distance ($d_A$) in units of Mpc for 100 evenly spaced redshift points from $z=0$ to $z=4$ using np.linspace(0, 4, 100). Save the results in a CSV file named result.csv with two columns:
 z: Redshift (100 evenly spaced values from 0 to 4)
@@ -218,11 +241,12 @@ def get_angular_diameter_distance():
     H0 = 67.5
     tau = 0.06
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau)
+    pars.InitPower.set_params(As=2e-9, ns=0.965)
     results = camb.get_background(pars)
     DA = results.angular_diameter_distance(z)
     return z,DA
 "
-8,Compute the linear matter power spectrum with Planck 2018 cosmological parameters for redshift 0,"Calculate the linear matter power spectrum ($P(k)$) at redshift $z=0$ for a flat Lambda CDM cosmology using the following parameters:
+Compute the linear matter power spectrum with Planck 2018 cosmological parameters for redshift 0,"Calculate the linear matter power spectrum ($P(k)$) at redshift $z=0$ for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -230,6 +254,8 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
 Compute the linear matter power spectrum ($P(k)$) in units of (Mpc/$h$)$^3$ for 200 evenly spaced $k$ values in the range $10^{-4} < k h < 1$ (Mpc$^{-1}$), using a maximum $k=2.0$ $h$/Mpc and np.linspace for the $k$ array. Save the results in a CSV file named result.csv with two columns:
 k: Wavenumber (in $h$/Mpc, 200 evenly spaced values)
@@ -244,6 +270,7 @@ def get_matter_power_spectrum():
     H0 = 67.5
     tau = 0.06
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau)
+    pars.InitPower.set_params(As=2e-9, ns=0.965)
     pars.set_matter_power(redshifts=[z], kmax=2.0)
     pars.NonLinear = camb.model.NonLinear_none
     results = camb.get_results(pars)
@@ -251,7 +278,7 @@ def get_matter_power_spectrum():
     kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=1, npoints = 200)
     return kh, pk[0]
 "
-9,Compute the delensed total CMB B-mode power spectrum with Planck 2018 cosmological parameters for a delensing efficiency of 10%.,"Calculate the delensed Cosmic Microwave Background (CMB) B-mode polarization power spectrum ($C_\ell^{BB}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the delensed total raw CMB B-mode power spectrum with Planck 2018 cosmological parameters for a delensing efficiency of 10%.,"Calculate the raw delensed Cosmic Microwave Background (CMB) B-mode polarization power spectrum ($C_\ell^{BB}$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -260,6 +287,8 @@ u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
 Tensor-to-scalar ratio ($r$): 0.1
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
 Compute the delensed B-mode power spectrum ($C_\ell^{BB}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$, applying a delensing efficiency of 10%. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
@@ -277,14 +306,15 @@ def get_bb_delensed():
     lmax=3000
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
     pars.WantTensors = True
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
-    powers = results.get_cmb_power_spectra(pars, CMB_unit='muK')
+    powers = results.get_cmb_power_spectra(pars,raw_cl=True, CMB_unit='muK')
     spectra_tensor = powers['tensor']
     Alens = 1 - (delens_eff/100)
-    spectra =results.get_partially_lensed_cls(Alens,CMB_unit='muK',lmax=lmax+500)
+    spectra =results.get_partially_lensed_cls(Alens,CMB_unit='muK',raw_cl=True,lmax=lmax+500)
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,2] + spectra_tensor[2:lmax+1,2]
 "
-10,Compute the delensed CMB Temperature power spectrum with Planck 2018 cosmological parameters for a delensing efficiency of 80%.,"Calculate the delensed Cosmic Microwave Background (CMB) temperature power spectrum ($C_\ell^{TT}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the delensed CMB Temperature power spectrum with Planck 2018 cosmological parameters for a delensing efficiency of 80%.,"Calculate the delensed Cosmic Microwave Background (CMB) temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -292,10 +322,12 @@ Neutrino mass sum ($\Sigma m_
 u$): 0.06 eV
 Curvature ($\Omega_k$): 0
 Optical depth to reionization ($	au$): 0.06
-Compute the delensed temperature power spectrum ($C_\ell^{TT}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$, applying a delensing efficiency of 80%. Save the results in a CSV file named result.csv with two columns:
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
 
+Compute the delensed temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=3000$, applying a delensing efficiency of 80%. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 3000)
-TT: Delensed temperature power spectrum ($C_\ell^{TT}$ in $\mu K^2$) ","import camb
+TT: Delensed temperature power spectrum ($l(l+1)C_l^{TT}/(2\pi)$ in $\mu K^2$) ","import camb
 import numpy as np
 def get_tt_delensed():
     omk=0
@@ -307,12 +339,13 @@ def get_tt_delensed():
     lmax=3000
     delens_eff = 80
     pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, lmax=lmax+500)
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
     Alens = 1 - (delens_eff/100)
     spectra =results.get_partially_lensed_cls(Alens,CMB_unit='muK',lmax=lmax+500)
     return np.arange(lmax+1)[2:], spectra[2:lmax+1,0]
 "
-11,Compute the CMB E-mode power spectrum for Planck 2018 cosmological parameters with optical depth tau = 0.1 with exponential reionization history.,"Calculate the Cosmic Microwave Background (CMB) E-mode polarization power spectrum ($C_\ell^{EE}$) for a flat Lambda CDM cosmology using the following parameters:
+Compute the CMB E-mode power spectrum for Planck 2018 cosmological parameters with optical depth tau = 0.1 with exponential reionization history.,"Calculate the Cosmic Microwave Background (CMB) E-mode polarization power spectrum ($l(l+1)C_l^{EE}/(2\pi)$) for a flat Lambda CDM cosmology using the following parameters with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
@@ -321,9 +354,9 @@ Scalar spectral index ($n_s$): 0.95
 Optical depth to reionization ($	au$): 0.1
 Reionization model: Exponential reionization with exponent power $2$
 
-Compute the E-mode power spectrum ($C_\ell^{EE}$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=100$. Save the results in a CSV file named result.csv with two columns:
+Compute the E-mode power spectrum ($l(l+1)C_l^{EE}/(2\pi)$) in units of $\mu K^2$ for multipole moments from $l=2$ to $l=100$. Save the results in a CSV file named result.csv with two columns:
 l: Multipole moment (integer values from 2 to 100)
-EE: E-mode polarization power spectrum ($C_\ell^{EE}$ in $\mu K^2$)","import camb
+EE: E-mode polarization power spectrum ($l(l+1)C_l^{EE}/(2\pi)$in $\mu K^2$)","import camb
 import numpy as np
 def get_ee():
     omk=0
@@ -340,13 +373,13 @@ def get_ee():
     cl = data.get_cmb_power_spectra(pars, lmax=lmax, CMB_unit='muK')['total']
     return np.arange(lmax+1)[2:], cl[2:lmax+1, 1]
 "
-12,Compute the relative difference in the linear matter power spectrum between normal and inverted neutrino hierarchy models at redshift 0.,"
-Calculate the relative difference in the linear matter power spectrum ($P(k)$) at redshift $z=0$ between two neutrino hierarchy models (normal and inverted) for a flat Lambda CDM cosmology using the following parameters:
+Compute the relative difference in the linear matter power spectrum between normal and inverted neutrino hierarchy models at redshift 0.,"Calculate the relative difference in the linear matter power spectrum ($P(k)$) at redshift $z=0$ between two neutrino hierarchy models (normal and inverted) for a flat Lambda CDM cosmology using the following parameters  with CAMB:
 Hubble constant ($H_0$): 67.5 km/s/Mpc
 Baryon density ($\Omega_b h^2$): 0.022
 Cold dark matter density ($\Omega_c h^2$): 0.122
 Neutrino mass sum ($\Sigma m_
 u$): 0.11 eV
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
 Scalar spectral index ($n_s$): 0.965
 
 Compute the linear matter power spectrum ($P(k)$) in units of (Mpc/$h$)$^3$ for 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$) for both:
@@ -359,12 +392,54 @@ rel_diff: Relative difference in the matter power spectrum ($(P(k){	ext{inverted
 def pk_neutrino_comparison():
     pars = camb.CAMBparams()
     pars.set_cosmology(H0=67.5, ombh2=0.022, omch2=0.122, mnu=0.11, neutrino_hierarchy='normal')
-    pars.InitPower.set_params(ns=0.965)
+    pars.InitPower.set_params(As=2e-9, ns=0.965)
     pars.set_matter_power(redshifts=[0.], kmax=2.0)
     results = camb.get_results(pars)
     kh, z, pk = results.get_matter_power_spectrum(minkh=1e-4, maxkh=2, npoints = 200)
     pars.set_cosmology(H0=67.5, ombh2=0.022, omch2=0.122, mnu=0.11, neutrino_hierarchy='inverted')
+    pars.InitPower.set_params(As=2e-9, ns=0.965,)
     results = camb.get_results(pars)
     kh2, z2, pk2 = results.get_matter_power_spectrum(minkh=1e-4, maxkh=2, npoints = 200)
     return kh, (pk2[0,:]/pk[0,:]-1)
 "
+Compute the delensing efficiency of the CMB B-mode polarization power spectrum for a flat Lambda CDM cosmology given the lensing noise power.,"Calculate the delensing efficiency of the Cosmic Microwave Background (CMB) B-mode polarization power spectrum for a flat Lambda CDM cosmology using the following parameters with CAMB given the lensing noise power:
+Hubble constant ($H_0$): 67.5 km/s/Mpc
+Baryon density ($\Omega_b h^2$): 0.022
+Cold dark matter density ($\Omega_c h^2$): 0.122
+Neutrino mass sum ($\Sigma m_
+u$): 0.06 eV
+Curvature ($\Omega_k$): 0
+Optical depth to reionization ($	au$): 0.06
+Scalar amplitude ($A_s$): $2 	imes 10^{-9}$
+Scalar spectral index ($n_s$): 0.965
+
+Load the lensing noise power spectrum ($N_0$) from the file '/Users/antoidicherianlonappan/Software/Benchmarks/data/N0.csv' with columns l and Nl. Here $Nl = N_0 	imes (\ell(\ell+1))^2 / (2\pi)$, and use values up to a maximum multipole $l=2000$. 
+Compute the following::
+1. The lensed B-mode power spectrum ($C_\ell^{BB}$) in units of $\mu K^2$ for multipole moments up to $l=2000$.
+2. The CMB lensing potential power spectrum ($C_\ell^{\phi\phi} (\ell(\ell+1))^2 / (2\pi) $) up to $l=2000$.
+3. Change the lensing potential array and noise power spectrum to have the same length $l=2000$.
+4. The residual lensing potential power spectrum, defined as cl_pp_res = cl_pp*(1 - (cl_pp/(cl_pp+n0))) or $C_\ell^{\phi\phi} 	imes (1 - (C_\ell^{\phi\phi} / (C_\ell^{\phi\phi} + N_0)))$ or like cl_pp_res = cl_pp*(1 - (cl_pp/(cl_pp+n0))).
+5. Pad the the residual lensing potential array to have same length as in Params.max_l 
+6. The delensed B-mode power spectrum ($C_\ell^{BB,	ext{delensed}}$) using the residual lensing potential power spectrum.
+7. The delensing efficiency as $100 	imes (C_\ell^{BB,	ext{lensed}} - C_\ell^{BB,	ext{delensed}})/ C_\ell^{BB,	ext{lensed}}.
+
+Save the results in a CSV file named 'result.csv' with two columns:
+l: Multipole moment (integer values from 2 to 100)
+delensing_efficiency: Delensing efficiency (in percent, single value for $l=2$ to $l=100$) ","import camb
+import numpy as np
+def delensing_efficiency():
+    lmax = 2000
+    l, n0 = np.loadtxt('./data/N0.csv',delimiter=',', skiprows=1).T
+    l = l[:lmax+1]
+    n0 = n0[:lmax+1]
+    pars = camb.set_params(H0=67.5, ombh2=0.022, omch2=0.122, mnu=0.06, omk=0, tau=0.06, As=2e-9, ns=0.965,lmax=2000)
+    pars.InitPower.set_params(As=2e-9, ns=0.965)
+    results = camb.get_results(pars)
+    bb_lens = results.get_cmb_power_spectra(pars, CMB_unit='muK')['lensed_scalar'][:lmax+1,2]
+    cl_pp =results.get_cmb_power_spectra(pars,CMB_unit='muK')['lens_potential'][:lmax+1,0]
+    cl_pp_res = cl_pp*(1 - (cl_pp/(cl_pp+n0)))
+    cl_pp_res = np.pad(cl_pp_res, (0, pars.max_l+1-len(cl_pp_res)), mode='constant')
+    results = camb.get_results(pars)
+    bb_delens = results.get_lensed_cls_with_spectrum(cl_pp_res,CMB_unit='muK')[:lmax+1,2]
+    delens_eff = 100 *  (bb_lens[2:101]-bb_delens[2:101])/bb_lens[2:101]
+    return np.arange(len(delens_eff))+2, delens_eff"

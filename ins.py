@@ -13,8 +13,25 @@ from inspect_ai.scorer import scorer, mean, stderr, CORRECT, INCORRECT, Score
 from inspect_ai.solver import TaskState
 import difflib
 import numpy as np
+import ast
 
-@solver
+def run_single_function(code: str):
+    """
+    Executes Python code defining one function, and returns the output of that function.
+    The function must take no arguments.
+    """
+    # Step 1: Parse code and find the function name
+    tree = ast.parse(code)
+    func_name = next(node.name for node in tree.body if isinstance(node, ast.FunctionDef))
+
+    # Step 2: Create one shared namespace for both imports and function
+    shared_namespace = {}
+    exec(code, shared_namespace)
+
+    # Step 3: Call the function
+    output = shared_namespace[func_name]()  # Call with no arguments
+    return output
+
 def submission(source: str):
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         state.output.completion = source
