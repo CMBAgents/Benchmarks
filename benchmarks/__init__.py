@@ -1,5 +1,5 @@
 import os
-from benchmarks.utils import download_file
+from benchmarks.utils import download_file, Logger
 
 DATA_DIR = os.path.join(os.path.dirname(__file__),'..', 'data')
 N0FILE = os.path.join(DATA_DIR, 'N0.csv')
