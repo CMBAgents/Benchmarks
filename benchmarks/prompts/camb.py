@@ -210,8 +210,8 @@ def get_bb():
     tau = 0.06
     lmax=3000
     r = 0
-    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500)
-    pars.WantTensors = True
+    pars = camb.set_params(H0=H0, ombh2=ombh2, omch2=omch2, mnu=mnu, omk=omk, tau=tau, r=r,lmax=lmax+500, lens_potential_accuracy=1)
+    pars.WantTensors = False
     pars.InitPower.set_params(As=2e-9, ns=0.965)
     results = camb.get_results(pars)
     powers =results.get_cmb_power_spectra(pars, CMB_unit='muK')

@@ -86,14 +86,14 @@ class Evaluator:
                                  *args, **kwargs
                                  ):
         """
-        Run the evaluation for a single prompt using cambcontext.
+        Run the evaluation for a single prompt using one_shot.
         Parameters:
         idx (int): Index of the prompt to evaluate.
         trial (int): Trial number for the evaluation.
         """
         wdir = self.prompt_dir(idx, trial)
         prompt = self.df.prompt.iloc[idx]
-        results = cmbagent.cambcontext(
+        results = cmbagent.one_shot(
                 prompt,
                 max_rounds=50,
                 agent=self.agent,
