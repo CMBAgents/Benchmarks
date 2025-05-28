@@ -8,3 +8,6 @@ if  os.path.isfile(N0FILE):
     pass
 else:
     download_file('https://github.com/CMBAgents/Benchmarks/releases/download/v1.0.0-alpha/N0.csv', N0FILE)
+
+
+from .evaluator import *

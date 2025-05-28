@@ -5,6 +5,9 @@ from tqdm import tqdm
 import numpy as np
 from benchmarks.utils import run_function
 import cmbagent
+import pickle as pl
+import matplotlib.pyplot as plt
+import warnings
 
 class Evaluator:
     def __init__(self,
@@ -129,10 +132,21 @@ class Evaluator:
         idx (int): Index of the prompt to evaluate.
         trial (int): Trial number for the evaluation.
         """
-        if self.agent == 'camb_context':
-            return self.___prompt_cambcontext___(idx, trial, *args, **kwargs)
+        wdir = self.prompt_dir(idx, trial)
+        fname = os.path.join(wdir, 'results.pkl')
+        if os.path.isfile(fname) and not self.rerun:
+            self.logger.log(f"Results for prompt {idx}, trial {trial} already exist, skipping", level='info')
+            results = pl.load(open(fname, 'rb'))
         else:
-            return self.__prompt_general__(idx, trial, *args, **kwargs)
+            if self.agent == 'camb_context':
+                results = self.___prompt_cambcontext___(idx, trial, *args, **kwargs)['final_context']
+            else:
+                results = self.__prompt_general__(idx, trial, *args, **kwargs)['final_context']
+            pl.dump(results, open(fname, 'wb'))
+        return results
+        
+        
+        
     
     def run_prompt_trials(self, idx: int,
                             *args, **kwargs):
@@ -158,8 +172,62 @@ class Evaluator:
             results.append(result)
         return results
     
-    def success_rate(self, results):
-        pass
+    def success_prompt(self, idx: int,special_case: bool = True):
+        """
+        Calculate the success rate for a single prompt.
+        Parameters:
+        idx (int): Index of the prompt to evaluate.
+        """
+        if special_case:
+            warnings.warn(
+                "The 'special_case=True' option will be removed in a future version.",
+                FutureWarning,
+                stacklevel=2
+            )
+        s = []
+        if special_case:
+            results = np.arange(self.trials)
+        else:
+            results = self.run_prompt_trials(idx)
+        for result in results:
+            if special_case:
+                resultfile = os.path.join(self.prompt_dir(idx,result), 'data', 'result.csv')
+            else:
+                resultfile = os.path.join(result['work_dir'],
+                                    result['database_path'],
+                                    'result.csv')
+            if not os.path.isfile(resultfile):
+                s.append(0)
+                continue
+            else:
+                x_llm, y_llm = np.loadtxt(resultfile, delimiter=',', skiprows=1).T
+            x_ref, y_ref = np.loadtxt(os.path.join(self.ref_dir, f'prompt_{idx}.csv'), delimiter=',', skiprows=1).T
+            if len(x_llm) != len(x_ref):
+                s.append(0)
+                continue
+            if np.allclose(x_llm, x_ref) and np.allclose(y_llm, y_ref, rtol=1e-1):
+                s.append(1)
+            else:
+                s.append(0)
+
+            # plt.loglog(x_llm, y_llm, label='LLM')
+            # plt.loglog(x_ref, y_ref, label='True')
+            # plt.legend()
+            # plt.savefig(os.path.join(result['work_dir'], 'cl_plot.png'))
+            # plt.close()
+        return np.mean(s)
+    
+    def success_all(self, special_case: bool = True):
+        """
+        Calculate the success rate for all prompts in the DataFrame.
+        Parameters:
+        special_case (bool): If True, use the special case for success calculation.
+        """
+        results = []
+        for idx in range(len(self.df)):
+            result = self.success_prompt(idx, special_case=special_case)
+            results.append(result)
+        return results
 
     
             
