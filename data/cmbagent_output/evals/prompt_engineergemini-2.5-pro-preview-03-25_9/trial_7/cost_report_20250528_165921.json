@@ -1,0 +1,44 @@
+[
+  {
+    "Agent": "executor response formatter",
+    "Cost ($)": 0.0033946,
+    "Prompt Tokens": 2682.0,
+    "Completion Tokens": 101.0,
+    "Total Tokens": 2783.0
+  },
+  {
+    "Agent": "engineer response formatter",
+    "Cost ($)": 0.0157256,
+    "Prompt Tokens": 3000.0,
+    "Completion Tokens": 2824.0,
+    "Total Tokens": 5824.0
+  },
+  {
+    "Agent": "terminator",
+    "Cost ($)": 0.010152,
+    "Prompt Tokens": 5072.0,
+    "Completion Tokens": 1.0,
+    "Total Tokens": 5073.0
+  },
+  {
+    "Agent": "control",
+    "Cost ($)": 0.011382,
+    "Prompt Tokens": 5535.0,
+    "Completion Tokens": 39.0,
+    "Total Tokens": 5574.0
+  },
+  {
+    "Agent": "engineer",
+    "Cost ($)": 0.027785,
+    "Prompt Tokens": 2340.0,
+    "Completion Tokens": 2486.0,
+    "Total Tokens": 4826.0
+  },
+  {
+    "Agent": "Total",
+    "Cost ($)": 0.0684392,
+    "Prompt Tokens": 18629.0,
+    "Completion Tokens": 5451.0,
+    "Total Tokens": 24080.0
+  }
+]

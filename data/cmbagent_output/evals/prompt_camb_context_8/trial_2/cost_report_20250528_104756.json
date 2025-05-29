@@ -1,0 +1,58 @@
+[
+  {
+    "Agent": "executor response formatter",
+    "Cost ($)": 0.0025883,
+    "Prompt Tokens": 1693.0,
+    "Completion Tokens": 165.0,
+    "Total Tokens": 1858.0
+  },
+  {
+    "Agent": "engineer response formatter",
+    "Cost ($)": 0.0099825,
+    "Prompt Tokens": 2011.0,
+    "Completion Tokens": 1766.0,
+    "Total Tokens": 3777.0
+  },
+  {
+    "Agent": "camb context",
+    "Cost ($)": 0.12441125,
+    "Prompt Tokens": 67545.0,
+    "Completion Tokens": 3998.0,
+    "Total Tokens": 71543.0
+  },
+  {
+    "Agent": "terminator",
+    "Cost ($)": 0.017066,
+    "Prompt Tokens": 8529.0,
+    "Completion Tokens": 1.0,
+    "Total Tokens": 8530.0
+  },
+  {
+    "Agent": "camb response formatter",
+    "Cost ($)": 0.023944,
+    "Prompt Tokens": 4252.0,
+    "Completion Tokens": 1930.0,
+    "Total Tokens": 6182.0
+  },
+  {
+    "Agent": "control",
+    "Cost ($)": 0.018302,
+    "Prompt Tokens": 8991.0,
+    "Completion Tokens": 40.0,
+    "Total Tokens": 9031.0
+  },
+  {
+    "Agent": "engineer",
+    "Cost ($)": 0.02523,
+    "Prompt Tokens": 7623.0,
+    "Completion Tokens": 1248.0,
+    "Total Tokens": 8871.0
+  },
+  {
+    "Agent": "Total",
+    "Cost ($)": 0.22152405,
+    "Prompt Tokens": 100644.0,
+    "Completion Tokens": 9148.0,
+    "Total Tokens": 109792.0
+  }
+]
