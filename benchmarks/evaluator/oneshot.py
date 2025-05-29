@@ -200,7 +200,11 @@ class Evaluator:
                 s.append(0)
                 continue
             else:
-                x_llm, y_llm = np.loadtxt(resultfile, delimiter=',', skiprows=1).T
+                try:
+                    x_llm, y_llm = np.loadtxt(resultfile, delimiter=',', skiprows=1).T
+                except:
+                    s.append(0)
+                    continue
             x_ref, y_ref = np.loadtxt(os.path.join(self.ref_dir, f'prompt_{idx}.csv'), delimiter=',', skiprows=1).T
             if len(x_llm) != len(x_ref):
                 s.append(0)
