@@ -116,7 +116,7 @@ The plan must have 3 steps or more. """):
         """
         wdir = self.prompt_dir(idx, trial)
         fname = os.path.join(wdir, 'results.pkl')
-        if os.path.isfile(fname) and not self.rerun:
+        if os.path.isfile(fname): #TODO:  and not self.rerun
             self.logger.log(f"Results for prompt {idx}, trial {trial} already exist, skipping", level='info')
             results = pl.load(open(fname, 'rb'))
         else:
