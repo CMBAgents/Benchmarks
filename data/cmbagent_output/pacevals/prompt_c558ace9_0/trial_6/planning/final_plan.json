@@ -1,0 +1,38 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Determine how to output the results in units of $\\mu K^2$.",
+                "Identify the best way to export the results for further processing (e.g., as a text or CSV file).",
+                "Specifically search for information about CAMB's Python interface and how to use it for this calculation.",
+                "Identify any potential unit conversion requirements for the input parameters or output."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and run CAMB for the specified cosmological parameters and output requirements.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Install CAMB and any necessary dependencies before implementing the calculation code.",
+                "Write code to set up CAMB with the provided cosmological parameters.",
+                "Include error handling in the code to catch and address any issues that might arise during the CAMB calculation.",
+                "Run the calculation to obtain the $C_l^{TT}$ spectrum for $l=2$ to $l=3000$.",
+                "Ensure the output is in units of $\\mu K^2$."
+            ],
+            "sub_task": "Implement and run the CAMB calculation using the specified parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Format the output data into two columns: l (multipole moment) and TT (temperature power spectrum).",
+                "Create a simple visualization of the power spectrum to verify the results look reasonable before saving the final CSV file.",
+                "Save the results as result.csv with the specified structure.",
+                "Document the code with comments explaining the parameter settings and calculation process for future reference.",
+                "Verify the CSV file for correctness and completeness."
+            ],
+            "sub_task": "Process and save the results in the required CSV format.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+{
+  "initialization_time_planning": 0.393341064453125,
+  "execution_time_planning": 39.437767028808594,
+  "initialization_time_control": 0.3902416229248047,
+  "execution_time_control": 61.12816905975342,
+  "total_time": 101.34951877593994
+}

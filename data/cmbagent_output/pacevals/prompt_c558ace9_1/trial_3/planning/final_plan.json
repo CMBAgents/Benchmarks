@@ -1,0 +1,35 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Confirm how to set the total neutrino mass and other cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$ for a specified $k$ range.",
+                "Investigate and summarize how the distribution of neutrino masses (hierarchy) affects the linear matter power spectrum in CAMB, to inform later analysis."
+            ],
+            "sub_task": "Gather detailed instructions on how to set neutrino hierarchy (normal vs inverted), relevant parameters, and understand the impact of neutrino mass distribution on the matter power spectrum in CAMB.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies.",
+                "Compute $P(k)$ at $z=0$ for 200 evenly spaced $k$ values in the specified range for both hierarchies.",
+                "Perform validation checks: ensure the power spectra are properly computed, the $k$ range is correctly sampled, and check for any numerical instabilities.",
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff.",
+                "Document the code with clear comments explaining parameter settings and calculation methods for reproducibility."
+            ],
+            "sub_task": "Implement the computation of the linear matter power spectrum for both hierarchies, validate results, and document the process.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a plot of the relative difference as a function of $k$.",
+                "Identify and annotate key features in the power spectrum differences.",
+                "Provide a brief interpretation of the results, referencing the impact of neutrino mass hierarchy on the matter power spectrum."
+            ],
+            "sub_task": "Visualize and analyze the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Identify the required CAMB input parameters and their correct format.",
+                "Explain how to convert $H_0 = 74$ km/s/Mpc to the $h$ parameter format required by CAMB.",
+                "Provide guidance on how to specify the neutrino mass sum ($\\Sigma m_\\nu = 0.06$ eV) in CAMB, including any relevant options or conventions.",
+                "Determine how to specify the multipole range ($l=2$ to $l=3000$) and output units ($\\mu K^2$).",
+                "Find out how to extract the raw temperature power spectrum ($C_l^{TT}$) from CAMB.",
+                "Check how to save the results in a CSV file with the required columns."
+            ],
+            "sub_task": "Gather detailed instructions for setting up and running CAMB with the specified cosmological parameters, including parameter conversions and neutrino handling.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Install CAMB if it is not already available in the environment.",
+                "Write code to set up CAMB with the provided cosmological parameters, using the correct conventions for $h$ and neutrino mass.",
+                "Run CAMB to compute the temperature power spectrum for $l=2$ to $l=3000$.",
+                "Extract the $C_l^{TT}$ values in units of $\\mu K^2$.",
+                "Create a visualization (plot) of the resulting power spectrum to check for reasonableness.",
+                "Save the results in a CSV file named result.csv with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Implement the computation and data extraction pipeline using CAMB, including installation and visualization.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Verify that the CSV file contains the correct multipole range and data format.",
+                "Ensure the units and values are as specified.",
+                "Check the power spectrum for any numerical artifacts or unexpected features that might indicate calculation errors.",
+                "Document the parameter choices and CAMB version used in a README or comment section to ensure reproducibility of results.",
+                "Confirm that the file and documentation are ready for further analysis or sharing."
+            ],
+            "sub_task": "Validate and finalize the output, ensuring reproducibility and quality.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

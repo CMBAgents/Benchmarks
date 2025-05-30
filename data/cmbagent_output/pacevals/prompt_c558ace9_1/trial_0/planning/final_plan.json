@@ -1,0 +1,34 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB, ensuring the total neutrino mass sum is set to 0.11 eV for both cases.",
+                "Retrieve guidance on how to set all required cosmological parameters in CAMB: Hubble constant (H₀), baryon density (Ωb h²), cold dark matter density (Ωc h²), scalar amplitude (Aₛ), and scalar spectral index (nₛ).",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$ for a specified $k$ range."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up CAMB for this analysis, with emphasis on neutrino mass sum and cosmological parameters.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies, ensuring the neutrino mass sum is 0.11 eV in both cases.",
+                "Implement input validation and error handling to ensure CAMB runs correctly with the provided parameters.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Use 'get_matter_power_spectrum' to compute $P(k)$ at $z=0$ for both hierarchies.",
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff."
+            ],
+            "sub_task": "Implement code to compute the linear matter power spectrum for both hierarchies, with robust error handling and input validation.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a plot of the relative difference as a function of $k$ to visualize the scale-dependent effects of neutrino hierarchy.",
+                "Calculate and report key statistics about the relative difference, including the maximum and average differences, and identify $k$ values where significant differences occur.",
+                "Check the CSV file for correctness and completeness."
+            ],
+            "sub_task": "Analyze, visualize, and summarize the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}
