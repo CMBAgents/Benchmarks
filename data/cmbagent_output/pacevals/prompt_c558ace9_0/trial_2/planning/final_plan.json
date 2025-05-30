@@ -1,0 +1,38 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Determine how to output the results in units of $\\mu K^2$.",
+                "Identify the best way to export or save the results in a CSV format.",
+                "Search for information about the CAMB Python package installation requirements and dependencies.",
+                "Identify the specific CAMB functions or methods needed to extract the raw temperature power spectrum (not derived or lensed spectra)."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and run CAMB for the specified cosmological parameters and output requirements.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Check for and install any required dependencies, including the CAMB Python package.",
+                "Write code to set up CAMB with the provided cosmological parameters.",
+                "Run the calculation to obtain $C_l^{TT}$ for $l=2$ to $l=3000$.",
+                "Ensure the output is in units of $\\mu K^2$.",
+                "Implement error handling in case the CAMB calculation fails with the given parameters."
+            ],
+            "sub_task": "Implement the computation of the CMB temperature power spectrum using CAMB with the specified parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a simple visualization (e.g., plot) of the power spectrum to verify the results look reasonable.",
+                "Format the results into two columns: l (multipole moment) and TT (temperature power spectrum).",
+                "Save the data as result.csv.",
+                "Include proper documentation in the code (comments explaining parameter choices and units) to make the implementation more maintainable.",
+                "Verify the CSV file matches the required format."
+            ],
+            "sub_task": "Save and verify the computed power spectrum.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

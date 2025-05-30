@@ -1,0 +1,35 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB, including how to convert between parameterizations (e.g., $H_0$ to $h$) and how to handle the neutrino mass sum ($\\Sigma m_\\nu$) correctly.",
+                "Identify the specific CAMB function or method that returns the raw CMB temperature power spectrum ($C_l^{TT}$), not derived or lensed quantities.",
+                "Find out how to configure CAMB to output the power spectrum in the required units ($\\mu K^2$) and for the exact multipole range $l=2$ to $l=3000$.",
+                "Identify the recommended method to save the results in a CSV file with the specified columns."
+            ],
+            "sub_task": "Gather detailed and specific instructions on how to set up and run CAMB for the specified cosmological parameters and output the temperature power spectrum ($C_l^{TT}$) in $\\mu K^2$ for $l=2$ to $l=3000$.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Install any necessary dependencies, including the correct version of CAMB that supports all required parameters.",
+                "Write and execute code to set up CAMB with the provided cosmological parameters, ensuring correct parameter conversion and input.",
+                "Run the calculation to obtain $C_l^{TT}$ for $l=2$ to $l=3000$, handling the multipole range specifically (e.g., by configuring CAMB or post-processing the output).",
+                "Convert the results to $\\mu K^2$ if necessary.",
+                "Save the output in a CSV file named result.csv with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Implement the computation of the CMB temperature power spectrum using CAMB with the specified parameters and save the results in result.csv.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Check that the CSV file contains the correct range of multipole moments and corresponding $C_l^{TT}$ values.",
+                "Confirm the units are in $\\mu K^2$ by checking the magnitude of the values against typical CMB power spectrum measurements.",
+                "Create a simple visualization (e.g., a plot) of the power spectrum to visually verify the results match expected CMB patterns.",
+                "Confirm the formatting is as specified and report completion or any issues encountered."
+            ],
+            "sub_task": "Verify and visualize the output to ensure the CSV file meets the requirements.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

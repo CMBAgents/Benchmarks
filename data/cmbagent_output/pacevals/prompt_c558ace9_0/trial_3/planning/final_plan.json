@@ -1,0 +1,29 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Provide information about the CAMB Python package installation requirements and steps.",
+                "Provide information on how to convert between different units in CAMB, specifically how to ensure the output is in $\\mu K^2$ as required.",
+                "Determine how to extract and save the results in a CSV file."
+            ],
+            "sub_task": "Gather detailed instructions on setting up and running CAMB for the specified cosmological parameters and output requirements.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Check for and install the CAMB package if not already available.",
+                "Write code to set up CAMB with the provided cosmological parameters.",
+                "Run the calculation to obtain the $C_l^{TT}$ spectrum for $l=2$ to $l=3000$.",
+                "Ensure the output is in units of $\\mu K^2$.",
+                "Include proper error handling in the code to deal with potential issues during CAMB execution.",
+                "Verify that the calculated spectrum covers exactly the required multipole range ($l=2$ to $l=3000$).",
+                "Format and save the results into a CSV file named result.csv with columns \"l\" and \"TT\".",
+                "Include a simple validation check to confirm the output data has the correct dimensions and reasonable values before finalizing the CSV file."
+            ],
+            "sub_task": "Implement the computation, validation, and saving of the CMB temperature power spectrum using CAMB with the specified parameters.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

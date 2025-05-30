@@ -1,0 +1,37 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the required input parameters and configuration options in CAMB for a flat Lambda CDM cosmology.",
+                "Identify how to specify the given cosmological parameters in CAMB, with attention to the Python interface.",
+                "Identify any potential unit conversion requirements for the input parameters, ensuring compatibility with CAMB's expected units.",
+                "Find out how to extract the raw temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$ in units of $\\mu K^2$.",
+                "Determine the recommended way to output results in a format suitable for CSV export."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and run CAMB (using the Python interface) to compute the CMB temperature power spectrum with custom cosmological parameters.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Install CAMB and any required dependencies if not already available in the environment.",
+                "Write code to set up CAMB with the provided cosmological parameters, using the Python interface.",
+                "Validate parameter input by checking the acceptable ranges for each parameter in CAMB to avoid potential errors.",
+                "Explicitly set the multipole range to $l=2$ to $l=3000$ in the CAMB configuration.",
+                "Run the calculation to obtain the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Ensure the output is in units of $\\mu K^2$."
+            ],
+            "sub_task": "Implement and execute the CAMB calculation using the specified parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a simple visualization (e.g., plot) of the power spectrum to verify the results look reasonable.",
+                "Format the results into two columns with proper headers: 'l' (multipole moment) and 'TT' (raw temperature power spectrum).",
+                "Save the data to a file named result.csv, ensuring the formatting matches the requirements.",
+                "Verify the CSV file for correctness and completeness."
+            ],
+            "sub_task": "Save and verify the computed power spectrum.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}
