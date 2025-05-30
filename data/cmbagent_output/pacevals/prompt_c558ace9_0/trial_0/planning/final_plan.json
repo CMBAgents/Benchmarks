@@ -1,0 +1,37 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB, including special handling for the neutrino mass sum parameter depending on CAMB version.",
+                "Identify any potential unit conversion requirements, especially for $H_0$ and $A_s$, and how to format them for CAMB.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Determine how to output the results in units of $\\mu K^2$.",
+                "Identify the method to export the results in a CSV file with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and run CAMB for the specified cosmological parameters and output requirements.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Install CAMB and any required dependencies if not already available.",
+                "Write code to set up CAMB with the specified cosmological parameters, using correct units and formatting.",
+                "Add comments in the code explaining the parameter choices and their cosmological significance.",
+                "Implement error handling to gracefully manage any issues during the CAMB calculation.",
+                "Run CAMB to compute the $C_l^{TT}$ power spectrum for $l=2$ to $l=3000$.",
+                "Ensure the output is in units of $\\mu K^2$.",
+                "Save the results in a CSV file named result.csv with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Implement the CAMB calculation and generate the required output.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Check that the output matches expected cosmological patterns (e.g., general shape and scale of the $C_l^{TT}$ spectrum).",
+                "Verify that the CSV file format is correct and contains the required columns and data range.",
+                "Confirm that the units and formatting are as specified."
+            ],
+            "sub_task": "Verify and validate the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

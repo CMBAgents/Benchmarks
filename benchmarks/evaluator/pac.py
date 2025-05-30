@@ -115,19 +115,25 @@ The plan must have 3 steps or more. """):
         trial (int): Trial number for the evaluation.
         """
         wdir = self.prompt_dir(idx, trial)
-        prompt = self.df.prompt.iloc[idx]
-        results = cmbagent.planning_and_control_context_carryover(prompt,
-                              max_rounds_control = self.max_rounds_control,
-                              n_plan_reviews = self.n_plan_reviews,
-                              max_n_attempts = self.max_n_attempts,
-                              max_plan_steps = self.max_plan_steps,
-                              default_llm_model = self.default_llm_model,
-                              engineer_model = self.engineer_model,
-                              camb_context_model = self.camb_context_model,
-                              researcher_model = self.researcher_model,
-                              plan_reviewer_model = self.plan_reviewer_model,
-                              plan_instructions = self.plan_instructions,
-                              work_dir = wdir,)
+        fname = os.path.join(wdir, 'results.pkl')
+        if os.path.isfile(fname) and not self.rerun:
+            self.logger.log(f"Results for prompt {idx}, trial {trial} already exist, skipping", level='info')
+            results = pl.load(open(fname, 'rb'))
+        else:
+            prompt = self.df.prompt.iloc[idx]
+            results = cmbagent.planning_and_control_context_carryover(prompt,
+                                max_rounds_control = self.max_rounds_control,
+                                n_plan_reviews = self.n_plan_reviews,
+                                max_n_attempts = self.max_n_attempts,
+                                max_plan_steps = self.max_plan_steps,
+                                default_llm_model = self.default_llm_model,
+                                engineer_model = self.engineer_model,
+                                camb_context_model = self.camb_context_model,
+                                researcher_model = self.researcher_model,
+                                plan_reviewer_model = self.plan_reviewer_model,
+                                plan_instructions = self.plan_instructions,
+                                work_dir = wdir,)['final_context']
+            pl.dump(results, open(fname, 'wb'))
         return results
     
     def run_prompt_trials(self, idx: int,
@@ -154,28 +160,16 @@ The plan must have 3 steps or more. """):
             results.append(result)
         return results
     
-    def success_prompt(self, idx: int,special_case: bool = True):
+    def success_prompt(self, idx: int):
         """
         Calculate the success rate for a single prompt.
         Parameters:
         idx (int): Index of the prompt to evaluate.
         """
-        if special_case:
-            warnings.warn(
-                "The 'special_case=True' option will be removed in a future version.",
-                FutureWarning,
-                stacklevel=2
-            )
         s = []
-        if special_case:
-            results = np.arange(self.trials)
-        else:
-            results = self.run_prompt_trials(idx)
+        results = self.run_prompt_trials(idx)
         for result in results:
-            if special_case:
-                resultfile = os.path.join(self.prompt_dir(idx,result), 'data', 'result.csv')
-            else:
-                resultfile = os.path.join(result['work_dir'],
+            resultfile = os.path.join(result['work_dir'],
                                     result['database_path'],
                                     'result.csv')
             if not os.path.isfile(resultfile):
