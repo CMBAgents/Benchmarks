@@ -1,0 +1,30 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Research how to properly distribute the total neutrino mass (0.11 eV) among the neutrino species for both normal and inverted hierarchies.",
+                "Investigate if CAMB has any specific functions or parameters for handling neutrino hierarchies directly, or if custom mass distributions need to be manually specified.",
+                "Confirm how to set the total neutrino mass and other cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$.",
+                "Note any special considerations for output units and $k$-range specification."
+            ],
+            "sub_task": "Gather detailed instructions on how to set neutrino hierarchy (normal and inverted) and compute the linear matter power spectrum using CAMB, including the use of 'get_matter_power_spectrum' and relevant parameter settings.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies, using the correct neutrino mass distributions.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Compute $P(k)$ at $z=0$ for both hierarchies using 'get_matter_power_spectrum'.",
+                "Include error handling and validation to ensure that the power spectra are properly computed before calculating the relative difference.",
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff.",
+                "Create a plot of the relative difference as a function of $k$ to visualize the impact of neutrino hierarchy.",
+                "Compute and report summary statistics (minimum, maximum, mean) of the relative difference to quantify the overall effect."
+            ],
+            "sub_task": "Implement the computation of the linear matter power spectrum for both neutrino hierarchies, calculate the relative difference, and provide analysis and visualization.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

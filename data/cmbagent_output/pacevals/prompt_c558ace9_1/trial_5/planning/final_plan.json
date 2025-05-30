@@ -1,0 +1,34 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Search for information about the neutrino mass distribution functions in CAMB and how they differ between normal and inverted hierarchies.",
+                "Confirm how to set the total neutrino mass and other cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$ for a specified $k$ range."
+            ],
+            "sub_task": "Gather detailed instructions on how to set neutrino hierarchy (normal vs inverted), relevant parameters, and mass distribution functions in CAMB, and how to use 'get_matter_power_spectrum'.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Verify CAMB installation and all required dependencies before proceeding.",
+                "Set up CAMB with the given cosmological parameters for both normal and inverted hierarchies.",
+                "Implement proper error handling when configuring CAMB parameters, especially for the neutrino hierarchy settings.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Compute $P(k)$ at $z=0$ for both hierarchies using 'get_matter_power_spectrum'."
+            ],
+            "sub_task": "Implement code to compute the linear matter power spectrum for both neutrino hierarchies using the specified cosmological parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff, and include appropriate headers and metadata documenting the parameters used.",
+                "Create a simple plot of the relative difference as a function of $k$ to help interpret the results."
+            ],
+            "sub_task": "Calculate the relative difference, save results, and visualize.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

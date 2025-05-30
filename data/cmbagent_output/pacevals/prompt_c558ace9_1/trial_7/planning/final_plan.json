@@ -1,0 +1,38 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Confirm how to set the total neutrino mass and other cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$ for a specified $k$ range.",
+                "Note any special considerations for output units and $k$-grid specification.",
+                "Explain how the neutrino mass sum of 0.11 eV should be distributed among neutrino species in both normal and inverted hierarchies."
+            ],
+            "sub_task": "Gather detailed instructions on how to set neutrino hierarchy (normal and inverted) and compute the linear matter power spectrum using CAMB, including the use of 'get_matter_power_spectrum' and relevant parameter settings.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Compute $P(k)$ at $z=0$ for both hierarchies using 'get_matter_power_spectrum'.",
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$.",
+                "Create a visualization (plot) of the relative difference as a function of $k$ to help verify the results visually before saving to CSV.",
+                "Document the exact CAMB version being used.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff."
+            ],
+            "sub_task": "Implement and run the code to compute the linear matter power spectrum for both neutrino hierarchies and calculate the relative difference.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Check that the CSV file contains 200 rows with the correct $k$ values and relative differences.",
+                "Ensure units and formatting are consistent with the requirements.",
+                "Confirm that the file is named result.csv and ready for further analysis or sharing.",
+                "Perform a sanity check on the magnitude of the relative difference to ensure it falls within physically expected ranges for this cosmological scenario."
+            ],
+            "sub_task": "Verify the output and ensure the CSV file is correctly formatted and contains the expected results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}
