@@ -1,0 +1,27 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to set the neutrino hierarchy (normal/inverted) in CAMB.",
+                "Research how to properly distribute the total neutrino mass (0.11 eV) among the neutrino species for both normal and inverted hierarchies in CAMB.",
+                "Confirm how to input the given cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for the required $k$ range and output units.",
+                "Investigate if CAMB requires any special settings or flags to ensure accurate power spectrum calculations at very low $k$ values ($10^{-4}\\ h/$Mpc)."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and compute the linear matter power spectrum in CAMB for both normal and inverted neutrino hierarchies, including all relevant parameter settings and numerical considerations.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the specified cosmological parameters and neutrino mass distributions for both hierarchies.",
+                "Compute $P(k)$ at $z=0$ for 200 evenly spaced $k$ values in the specified range for the normal hierarchy.",
+                "Compute $P(k)$ at $z=0$ for 200 evenly spaced $k$ values in the specified range for the inverted hierarchy.",
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff.",
+                "Create a plot of the relative difference as a function of $k$ to help interpret the results."
+            ],
+            "sub_task": "Implement the computation of the linear matter power spectrum for both hierarchies, calculate the relative difference, and visualize the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}
