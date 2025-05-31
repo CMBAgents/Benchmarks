@@ -1,0 +1,35 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB, including the neutrino mass sum parameter.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Determine how to output the results in units of $\\mu K^2$.",
+                "Identify how to export the results in a CSV format with columns for $l$ and $TT$.",
+                "Gather information about CAMB installation requirements and dependencies."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and run CAMB for the specified cosmological parameters and output requirements, including installation prerequisites.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Write code to set up CAMB with the specified cosmological parameters, ensuring the neutrino mass sum is handled correctly.",
+                "Run CAMB to compute the $C_l^{TT}$ spectrum for $l=2$ to $l=3000$.",
+                "Convert the results to units of $\\mu K^2$ if necessary.",
+                "Save the results in a CSV file named result.csv with columns: $l$ and $TT$.",
+                "Implement error handling and logging to capture and report any issues during the CAMB run."
+            ],
+            "sub_task": "Implement the computation and data export using CAMB, with robust error handling and correct neutrino mass treatment.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Check that the output file contains the correct range of multipole moments ($l=2$ to $l=3000$).",
+                "Confirm that the power spectrum values are in the expected range for a standard ΛCDM model.",
+                "Create a simple plot of the power spectrum to visually confirm the characteristic acoustic peaks."
+            ],
+            "sub_task": "Verify and validate the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

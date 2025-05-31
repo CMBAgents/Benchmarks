@@ -1,0 +1,35 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to set the neutrino hierarchy (normal/inverted) in CAMB.",
+                "Gather information on how to properly distribute the total neutrino mass (0.11 eV) among the neutrino species for both hierarchies.",
+                "Confirm how to input the given cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for the required $k$ range and output units."
+            ],
+            "sub_task": "Gather detailed instructions on how to set up and compute the linear matter power spectrum in CAMB for both normal and inverted neutrino hierarchies, including how to specify the hierarchy, distribute the total neutrino mass, and set relevant parameters.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Write code to set up CAMB with the specified cosmological parameters for both normal and inverted hierarchies, using the correct neutrino mass distribution.",
+                "Compute $P(k)$ at $z=0$ for 200 evenly spaced $k$ values in the specified range for both hierarchies.",
+                "Verify that the computed power spectra have reasonable values and expected behavior before proceeding.",
+                "Include error handling to manage potential issues with CAMB parameter settings or computation failures.",
+                "Calculate the relative difference $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff."
+            ],
+            "sub_task": "Implement the computation of the linear matter power spectrum for both hierarchies, verify results, and calculate the relative difference.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a plot of the relative difference as a function of $k$.",
+                "Identify the $k$-ranges where the differences are most significant.",
+                "Provide a brief summary of the physical implications of the results."
+            ],
+            "sub_task": "Visualize and analyze the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

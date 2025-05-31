@@ -1,0 +1,37 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input the given cosmological parameters into CAMB.",
+                "Gather information about CAMB installation requirements and dependencies.",
+                "Find out how to configure CAMB to compute the temperature power spectrum ($C_l^{TT}$) for $l=2$ to $l=3000$.",
+                "Determine which specific CAMB functions are needed to extract the raw temperature power spectrum (not derived quantities).",
+                "Determine how to output the results in units of $\\mu K^2$.",
+                "Identify the best way to export the results for post-processing (e.g., as a text or CSV file)."
+            ],
+            "sub_task": "Gather comprehensive instructions on CAMB setup, usage, and output extraction for the specified cosmological calculation.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Write code to set up CAMB with the provided cosmological parameters, including installation and dependency management.",
+                "Document the code with comments explaining the parameter choices and their physical meaning.",
+                "Run the calculation to obtain the $C_l^{TT}$ spectrum for $l=2$ to $l=3000$.",
+                "Convert the results to units of $\\mu K^2$ if necessary.",
+                "Include error handling to manage potential issues with parameter ranges or computation failures.",
+                "Save the results in a CSV file named result.csv with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Implement and run the CAMB calculation using the specified parameters, with robust code and clear documentation.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Check that the output $C_l^{TT}$ spectrum matches expected cosmological behavior (e.g., general shape, order of magnitude).",
+                "Verify that the CSV file is correctly formatted with the required columns and data range.",
+                "Confirm that the results are in the correct units ($\\mu K^2$) and that the file is named result.csv."
+            ],
+            "sub_task": "Verify and validate the results and output format.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

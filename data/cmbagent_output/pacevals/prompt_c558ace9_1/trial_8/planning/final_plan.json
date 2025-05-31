@@ -1,0 +1,33 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Provide guidance on how to distribute the total neutrino mass sum of 0.11 eV across neutrino species for both hierarchies.",
+                "Explain how to ensure all other cosmological parameters (Hubble constant, baryon density, cold dark matter density, $A_s$, $n_s$) are kept identical between the two models.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for extracting $P(k)$ at $z=0$ for a specified $k$ range."
+            ],
+            "sub_task": "Gather detailed instructions on setting up neutrino hierarchies and cosmological parameters in CAMB, with a focus on mass distribution and parameter consistency.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies, following the guidance from Step 1.",
+                "Include validation checks to ensure the CAMB models are properly configured and parameters are consistent between the two runs.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Use 'get_matter_power_spectrum' to compute $P(k)$ at $z=0$ for both hierarchies."
+            ],
+            "sub_task": "Implement code to compute the linear matter power spectrum for both hierarchies, including validation checks.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$.",
+                "Save the results in a CSV file named result.csv with columns: k, rel_diff.",
+                "Generate a simple plot of the relative difference as a function of $k$ to aid interpretation."
+            ],
+            "sub_task": "Calculate the relative difference, save results, and visualize.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

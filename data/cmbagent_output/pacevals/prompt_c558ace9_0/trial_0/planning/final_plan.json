@@ -1,0 +1,35 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Search for the correct way to input all given cosmological parameters into CAMB, including special attention to the neutrino mass sum parameter and its handling in different CAMB versions.",
+                "Find out how to configure CAMB to output the temperature power spectrum ($C_l^{TT}$) from $l=2$ to $l=3000$.",
+                "Determine the correct units for the output ($\\mu K^2$) and how to save results in CSV format.",
+                "Gather information about any required CAMB installation steps and dependencies needed before running calculations."
+            ],
+            "sub_task": "Gather comprehensive instructions on setting up and running CAMB for the specified cosmological parameters and output requirements.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Write code to set up CAMB with the specified parameters, including proper handling of the neutrino mass sum.",
+                "Include documentation in the code explaining parameter choices and the calculation process.",
+                "Implement error handling for potential issues with parameter ranges or computational limitations when calculating up to $l=3000$.",
+                "Run CAMB to compute the $C_l^{TT}$ spectrum for $l=2$ to $l=3000$.",
+                "Convert the output to the required units ($\\mu K^2$) if necessary.",
+                "Save the results in a CSV file named result.csv with columns \"l\" and \"TT\"."
+            ],
+            "sub_task": "Implement and execute the CAMB calculation pipeline with robust code and documentation.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Verify that the output file format is correct and that the multipole range is complete ($l=2$ to $l=3000$).",
+                "Confirm that the units are in $\\mu K^2$.",
+                "Create a simple plot of the power spectrum to visually verify that the results match expected CMB patterns."
+            ],
+            "sub_task": "Validate and verify the results.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}

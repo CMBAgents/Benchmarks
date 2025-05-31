@@ -1,0 +1,37 @@
+[
+  {
+    "Agent": "camb context",
+    "Cost ($)": 0.1884725,
+    "Prompt Tokens": 2026.0,
+    "Completion Tokens": 18594.0,
+    "Total Tokens": 20620.0
+  },
+  {
+    "Agent": "terminator",
+    "Cost ($)": 0.04082,
+    "Prompt Tokens": 20406.0,
+    "Completion Tokens": 1.0,
+    "Total Tokens": 20407.0
+  },
+  {
+    "Agent": "camb response formatter",
+    "Cost ($)": 0.05259,
+    "Prompt Tokens": 18043.0,
+    "Completion Tokens": 2063.0,
+    "Total Tokens": 20106.0
+  },
+  {
+    "Agent": "control",
+    "Cost ($)": 0.090696,
+    "Prompt Tokens": 43484.0,
+    "Completion Tokens": 466.0,
+    "Total Tokens": 43950.0
+  },
+  {
+    "Agent": "Total",
+    "Cost ($)": 0.3725785,
+    "Prompt Tokens": 83959.0,
+    "Completion Tokens": 21124.0,
+    "Total Tokens": 105083.0
+  }
+]

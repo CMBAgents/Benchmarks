@@ -1,0 +1,37 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Find out how to specify normal and inverted neutrino hierarchies in CAMB.",
+                "Research how to set a fixed total neutrino mass (0.11 eV) while varying the hierarchy between normal and inverted.",
+                "Confirm how to set the other cosmological parameters in CAMB.",
+                "Retrieve the correct usage of 'get_matter_power_spectrum' for a custom $k$ array.",
+                "Note any special considerations for output units and redshift."
+            ],
+            "sub_task": "Gather detailed instructions on how to set neutrino hierarchy (normal vs inverted) and relevant parameters in CAMB, and how to use 'get_matter_power_spectrum' for the required $k$ range.",
+            "sub_task_agent": "camb_context"
+        },
+        {
+            "bullet_points": [
+                "Set up CAMB with the provided cosmological parameters for both normal and inverted hierarchies.",
+                "Generate 200 evenly spaced $k$ values in the range $10^{-4} < k h < 2$ (Mpc$^{-1}$).",
+                "Compute $P(k)$ at $z=0$ for both hierarchies using 'get_matter_power_spectrum'.",
+                "Perform validation checks: ensure no NaN values, check that the results are physically reasonable, and that the magnitude of differences is as expected.",
+                "Create a visualization (plot) of the power spectra for both hierarchies to help identify any potential issues.",
+                "Only after validation, calculate the relative difference: $(P(k)_{\\text{inverted}} / P(k)_{\\text{normal}} - 1)$ for each $k$."
+            ],
+            "sub_task": "Implement the computation of the linear matter power spectrum for both hierarchies, validate results, and visualize the spectra.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create a CSV file named result.csv.",
+                "Include two columns: 'k' (wavenumber in $h$/Mpc) and 'rel_diff' (relative difference).",
+                "Add appropriate headers and metadata to the CSV file documenting the cosmological parameters used and the neutrino hierarchy settings, to ensure reproducibility of the analysis.",
+                "Ensure the file is formatted for easy downstream analysis."
+            ],
+            "sub_task": "Save the results to a CSV file with documentation.",
+            "sub_task_agent": "engineer"
+        }
+    ]
+}
